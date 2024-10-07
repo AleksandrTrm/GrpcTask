@@ -1,0 +1,27 @@
+﻿services:
+  grcp-postgres:
+    image: postgres
+    container_name: grcp-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: grcp_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5434:5432
+    volumes:
+      - grcp-postgres-data:/var/lib/postgresql/data
+
+  grpc-seq:
+    image: datalust/seq:latest
+    container_name: grpc_seq
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5431:5431
+      - 8081:80
+    
+    
+volumes:
+  grcp-postgres-data:

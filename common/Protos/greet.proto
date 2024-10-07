@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server";
+
+import "google/protobuf/timestamp.proto";
+
+package read;
+
+service ReaderConfiguration {
+  rpc ReadConfiguration (ConfigurationRequest) returns (ResultReply);
+}
+
+message ConfigurationRequest {
+  google.protobuf.Timestamp PacketTimestamp = 1;
+  int32 PacketSeqNumber = 2;
+  int32 NRecords = 3;
+  repeated Data PacketData = 4;
+}
+
+message Data {
+  string Decimal1 = 1;
+  string Decimal2 = 2;
+  string Decimal3 = 3;
+  string Decimal4 = 4;
+  google.protobuf.Timestamp Timestamp = 5;
+}
+
+message ResultReply {
+  optional Error error = 1;
+  bool isSuccess = 2;
+}
+
+message Error {
+  optional string message = 1;
+  optional string  code = 2;
+}

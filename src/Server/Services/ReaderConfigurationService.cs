@@ -8,7 +8,7 @@ namespace Server.Services;
 public class ReaderConfigurationService : ReaderConfiguration.ReaderConfigurationBase
 {
     private readonly ILogger<ReaderConfigurationService> _logger;
-    private ApplicationDbContext _dbContext;
+    private ApplicationDbContext _dbContext;    
 
     public ReaderConfigurationService(
         ILogger<ReaderConfigurationService> logger, 
@@ -56,6 +56,11 @@ public class ReaderConfigurationService : ReaderConfiguration.ReaderConfiguratio
             grpcDataList.Add(grpcData);
         }
 
+        return await Save(grpcDataList);
+    }
+
+    private async Task<ResultReply> Save(List<GrpcData> grpcDataList)
+    {
         try
         {
             await _dbContext.GrpcData.AddRangeAsync(grpcDataList);
@@ -64,7 +69,7 @@ public class ReaderConfigurationService : ReaderConfiguration.ReaderConfiguratio
         catch (OperationCanceledException ex)
         {
             _logger.LogError(ex, "Operation has been cancelled");
-            
+
             var error = new Error
             {
                 Message = "Operation has been cancelled",
@@ -86,12 +91,16 @@ public class ReaderConfigurationService : ReaderConfiguration.ReaderConfiguratio
                 Message = "Error occurred while saving configuration to database",
                 Code = "database.error"
             };
-            
+
             return new ResultReply
             {
                 Error = error,
                 IsSuccess = false
             };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error");
         }
         
         _logger.LogInformation("The configuration was added successfully");
