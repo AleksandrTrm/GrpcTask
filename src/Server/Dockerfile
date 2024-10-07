@@ -1,8 +1,9 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM ubuntu:24.02
 USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5001
+EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release

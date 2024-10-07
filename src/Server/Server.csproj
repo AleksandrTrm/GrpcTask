@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Protobuf Include="Protos/read.proto" GrpcService="Server"></Protobuf>
+    </ItemGroup>
+    
+    <ItemGroup>
         <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
         <PackageReference Include="FluentValidation" Version="11.10.0" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
@@ -24,14 +28,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Include="..\..\common\protos\greet.proto" GrpcServices="Server"/>
       <Content Include="..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Protos\" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,29 @@
 ﻿services:
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: ./src/Server/Dockerfile
+    environment:
+      - BUILD_CONFIGURATION=Development
+    ports:
+      - 5001:5001
+    depends_on:
+      - grcp-postgres
+      - grpc-seq
+
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: ./src/Client/Dockerfile
+    ports:
+      - 5064:5064
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - server
+
   grcp-postgres:
     image: postgres
     container_name: grcp-postgres
@@ -20,8 +45,7 @@
       - ACCEPT_EULA=Y
     ports:
       - 5431:5431
-      - 8081:80
-    
-    
+      - 8090:80
+
 volumes:
   grcp-postgres-data:
