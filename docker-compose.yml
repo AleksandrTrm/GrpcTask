@@ -8,30 +8,43 @@
       - BUILD_CONFIGURATION=Development
     ports:
       - 5001:5001
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5001" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     depends_on:
-      - grcp-postgres
-      - grpc-seq
+      grcp-postgres:
+        condition: service_healthy
+      grpc-seq:
+        condition: service_started
 
   client:
     container_name: client
     build:
       context: .
-      dockerfile: ./src/Client/Dockerfile
+      dockerfile: ./src/ConsoleClient/Dockerfile
     ports:
       - 5064:5064
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
-      - server
+      server:
+        condition: service_started
 
   grcp-postgres:
-    image: postgres
+    image: postgres:16
     container_name: grcp-postgres
     restart: always
     environment:
       POSTGRES_DB: grcp_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     ports:
       - 5434:5432
     volumes:

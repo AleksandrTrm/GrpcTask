@@ -7,12 +7,12 @@ public class GrpcData
     public GrpcData(
         int packetSeqNum, 
         int recordSeqNum,
-        DateTime packetTimestamp, 
+        long packetTimestamp, 
         string decimal1, 
         string decimal2, 
         string decimal3, 
         string decimal4, 
-        DateTime recordTimestamp)
+        long recordTimestamp)
     {
         PacketSeqNum = packetSeqNum;
         RecordSeqNum = recordSeqNum;
@@ -28,7 +28,7 @@ public class GrpcData
 
     public int RecordSeqNum { get; init; }
 
-    public DateTime PacketTimestamp { get; init; }
+    public long PacketTimestamp { get; init; }
 
     public string Decimal1 { get; init; }
 
@@ -38,5 +38,5 @@ public class GrpcData
 
     public string Decimal4 { get; init; }
     
-    public DateTime RecordTimestamp { get; init; }
+    public long RecordTimestamp { get; init; }
 }

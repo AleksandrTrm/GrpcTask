@@ -1,0 +1,7 @@
+﻿{
+  "TotalPackets": 5,
+  "RecordsInPacket": 5,
+  "TimeInterval": 5,
+  "GRpcServerAddr": "127.0.0.1",
+  "GrpcServerPort": 5001
+}

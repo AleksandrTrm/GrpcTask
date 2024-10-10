@@ -46,12 +46,12 @@ public class ReaderConfigurationService : ReaderConfiguration.ReaderConfiguratio
             var grpcData = new GrpcData(
                 request.PacketSeqNumber, 
                 i + 1,
-                request.PacketTimestamp.ToDateTime(),
+                request.PacketTimestamp,
                 request.PacketData[i].Decimal1,
                 request.PacketData[i].Decimal2,
                 request.PacketData[i].Decimal3,
                 request.PacketData[i].Decimal4,
-                request.PacketData[i].Timestamp.ToDateTime());
+                request.PacketData[i].Timestamp);
 
             grpcDataList.Add(grpcData);
         }

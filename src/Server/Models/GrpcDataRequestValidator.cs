@@ -10,7 +10,7 @@ public class GrpcDataRequestValidator : AbstractValidator<ConfigurationRequest>
         RuleFor(r => r.PacketTimestamp);
         
         RuleFor(r => r.PacketSeqNumber)
-            .NotEmpty();
+            .Must(r => r >= 0);
         
         RuleFor(r => r.NRecords)
             .Must(n => n > 0)
