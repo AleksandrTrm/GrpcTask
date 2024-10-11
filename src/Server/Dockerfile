@@ -15,10 +15,6 @@ FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-WORKDIR /app
-COPY src/Server/Migrations /migrations
-RUN migrate -source file:///migrations -database postgres://postgres:postgres@localhost:5432/grcp_db up
-
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
