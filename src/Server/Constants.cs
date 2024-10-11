@@ -2,5 +2,5 @@
 
 public class Constants
 {
-    public const string DATABASE = "Host=localhost;Port=5434;Database=grpc_db;Username=postgres;Password=postgres";
+    public const string DATABASE = "Host=localhost;Port=5432;Database=grpc_db;Username=postgres;Password=postgres";
 }
