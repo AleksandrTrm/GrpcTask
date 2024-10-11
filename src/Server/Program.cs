@@ -25,7 +25,7 @@ Log.Logger = new LoggerConfiguration()
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    serverOptions.Listen(new IPAddress([127, 0, 0, 1]), builder.Configuration.GetValue<int>("Port"));
+    serverOptions.Listen(new IPAddress([0, 0, 0, 0]), builder.Configuration.GetValue<int>("Port"));
 });
 
 var app = builder.Build();
