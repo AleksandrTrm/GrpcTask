@@ -85,7 +85,8 @@ public class MessageSender
 
     private static PacketOptions GetOptions()
     {
-        var filePath = "Options/Configuration.json";
+        //var filePath = "Options/Configuration.json";
+        var filePath = "../../../Options/Configuration.json";
         
         var result = JsonSerializer.Deserialize<PacketOptions>(
                 File.ReadAllText(filePath),
